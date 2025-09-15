@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { Pool } from 'pg';
+import bcrypt from 'bcryptjs';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -64,7 +65,6 @@ export async function POST(request: NextRequest) {
     // Also update the password in our custom User table
     const client = await pool.connect();
     try {
-      const bcrypt = require('bcryptjs');
       const hashedPassword = await bcrypt.hash(password, 12);
 
       await client.query(

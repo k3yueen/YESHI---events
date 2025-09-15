@@ -25,7 +25,7 @@ export function ForgotPasswordForm() {
         body: JSON.stringify({ email }),
       });
 
-      let data: any = null;
+      let data: { error?: string; message?: string } | null = null;
       try {
         data = await response.json();
       } catch (e) {

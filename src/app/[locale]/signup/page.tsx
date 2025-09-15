@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 import { SignupForm } from '@/components/auth/signup-form';
+import Link from 'next/link';
 import { Logo } from '@/components/auth/logo';
 
 interface SignupPageProps {
@@ -51,9 +52,9 @@ export default async function SignupPage({ params }: SignupPageProps) {
         >
           {/* Back link */}
           <div className="mb-3">
-            <a href="/login" className="text-gray-600 hover:text-gray-800 text-sm font-bold">
+            <Link href="/login" className="text-gray-600 hover:text-gray-800 text-sm font-bold">
               ← Back
-            </a>
+            </Link>
           </div>
 
           {/* Header */}
