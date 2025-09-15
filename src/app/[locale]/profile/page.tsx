@@ -7,20 +7,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { MapPin, Star, Heart, BookOpen, Settings, User, Clock, Plus } from 'lucide-react';
 import Link from 'next/link';
 
-interface ProfilePageProps {
-  params: {
-    locale: string;
-  };
-}
+interface ProfilePageProps { params: Promise<{ locale: string }> }
 
-export async function generateMetadata({ params: { locale } }: ProfilePageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: ProfilePageProps): Promise<Metadata> {
+  const { locale } = await params;
   return {
     title: `YESHI - ${locale === 'ro' ? 'Profilul Meu' : 'My Profile'}`,
     description: 'Manage your YESHI profile, favorites, and collections',
   };
 }
 
-export default async function ProfilePage({ params: { locale } }: ProfilePageProps) {
+export default async function ProfilePage({ params }: ProfilePageProps) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'navigation' });
 
   // Mock user data - in real app this would come from the database

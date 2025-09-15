@@ -6,13 +6,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { MapPin, Star, Heart, ArrowRight, Clock, Flame, Percent, Calendar } from 'lucide-react';
 import Link from 'next/link';
 
-interface PromosPageProps {
-  params: {
-    locale: string;
-  };
-}
+interface PromosPageProps { params: Promise<{ locale: string }> }
 
-export async function generateMetadata({ params: { locale } }: PromosPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PromosPageProps): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'navigation' });
 
   return {
@@ -21,7 +18,8 @@ export async function generateMetadata({ params: { locale } }: PromosPageProps):
   };
 }
 
-export default async function PromosPage({ params: { locale } }: PromosPageProps) {
+export default async function PromosPage({ params }: PromosPageProps) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'navigation' });
 
   // Mock promos data - in real app this would come from the database
