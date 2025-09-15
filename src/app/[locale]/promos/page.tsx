@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { MapPin, Star, Heart, ArrowRight, Clock, Fire, Percent, Calendar } from 'lucide-react';
+import { MapPin, Star, Heart, ArrowRight, Clock, Flame, Percent, Calendar } from 'lucide-react';
 import Link from 'next/link';
 
 interface PromosPageProps {
@@ -151,7 +151,7 @@ export default async function PromosPage({ params: { locale } }: PromosPageProps
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button variant="outline" size="lg" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
-              <Fire className="mr-2 h-5 w-5" />
+              <Flame className="mr-2 h-5 w-5" />
               {locale === 'ro' ? 'Promoții Boostate' : 'Boosted Promos'}
             </Button>
             <Button variant="outline" size="lg" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
@@ -199,7 +199,7 @@ export default async function PromosPage({ params: { locale } }: PromosPageProps
                     </Badge>
                     {promo.isBoosted && (
                       <Badge className="bg-purple-600 text-white animate-pulse">
-                        <Fire className="h-3 w-3 mr-1" />
+                        <Flame className="h-3 w-3 mr-1" />
                         {locale === 'ro' ? 'Boostat' : 'Boosted'}
                       </Badge>
                     )}
@@ -285,7 +285,7 @@ export default async function PromosPage({ params: { locale } }: PromosPageProps
           {activePromos.length === 0 && (
             <div className="text-center py-16">
               <div className="max-w-md mx-auto">
-                <Fire className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+                <Flame className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
                 <h3 className="text-xl font-semibold mb-2">
                   {locale === 'ro' ? 'Nu Există Promoții Active' : 'No Active Promotions'}
                 </h3>

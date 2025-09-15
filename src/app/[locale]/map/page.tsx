@@ -3,16 +3,13 @@ import { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { MapPin, Star, Heart, Filter, Layers, Navigation, MyLocation } from 'lucide-react';
+import { MapPin, Star, Heart, Filter, Layers, Navigation, LocateFixed } from 'lucide-react';
 import Link from 'next/link';
 
-interface MapPageProps {
-  params: {
-    locale: string;
-  };
-}
+interface MapPageProps { params: Promise<{ locale: string }> }
 
-export async function generateMetadata({ params: { locale } }: MapPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: MapPageProps): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'map' });
 
   return {
@@ -21,7 +18,8 @@ export async function generateMetadata({ params: { locale } }: MapPageProps): Pr
   };
 }
 
-export default async function MapPage({ params: { locale } }: MapPageProps) {
+export default async function MapPage({ params }: MapPageProps) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'map' });
 
   // Mock map data - in real app this would come from the database
@@ -143,7 +141,7 @@ export default async function MapPage({ params: { locale } }: MapPageProps) {
         {/* Map Controls Overlay */}
         <div className="absolute top-4 right-4 flex flex-col space-y-2">
           <Button size="sm" className="bg-white shadow-lg hover:bg-gray-50">
-            <MyLocation className="h-4 w-4" />
+            <LocateFixed className="h-4 w-4" />
           </Button>
           <Button size="sm" className="bg-white shadow-lg hover:bg-gray-50">
             <Navigation className="h-4 w-4" />
